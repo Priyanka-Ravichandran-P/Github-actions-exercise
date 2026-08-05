@@ -1,4 +1,4 @@
-name: Lint Workflow
+name: Lint
 on: push
 jobs:
     lint:
@@ -13,8 +13,5 @@ jobs:
             - name: Install Dependencies
               run: npm ci
             - name: Run Linters
-              uses: wearerequired/lint-action@v3
-              with:
-                eslint: true
-                prettier: true
+              run: npm lint
             
