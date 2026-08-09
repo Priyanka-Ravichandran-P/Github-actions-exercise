@@ -26,7 +26,7 @@ jobs:
             - name: Download Dist Files
               uses: actions/download-artifact@v4
               with: 
-                name: Build Files
+                name: Dist Files
                 path: dist
             - name: Output Dist Files
               run: ls
