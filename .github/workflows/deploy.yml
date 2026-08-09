@@ -14,17 +14,22 @@ jobs:
               run: npm ci
             - name: Build
               run: npm run build
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: Dist Files
+                path: dist
     deploy:
+        needs: build
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout Repository
-              uses: actions/checkout@v7
-            - name: Install NodeJS
-              uses: actions/setup-node@v3
-              with:
-                node-version: 18
-            - name: Install Dependencies
-              run: npm ci
+            - name: Download Dist Files
+              uses: actions/download-artifact@v4
+              with: 
+                name: Build Files
+                path: dist
+            - name: Output Dist Files
+              run: ls
             - name: Deploying
               run: echo "Deploying...."
                 
