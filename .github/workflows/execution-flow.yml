@@ -28,8 +28,8 @@ jobs:
           id: test
         - name: Test
           run: npm test
-          if: failure() && steps.test.outcome == 'failure'
         - name: Output Files
+          if: failure() && steps.test.outcome == 'failure'
           uses: actions/upload-artifact@v4
           with:
             name: test output
