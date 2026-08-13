@@ -25,17 +25,15 @@ jobs:
             node-version: 18
         - name: Install Dependencies
           run: npm ci
+          id: test
         - name: Test
           run: npm test
+          if: failure() && steps.test.outcome == 'failure'
         - name: Output Files
           uses: actions/upload-artifact@v4
           with:
             name: test output
             path: test.json
-        - name: Output
-          run: |
-            ls -la
-            find . -maxdepth 3 -type f | sort
     build:
       needs: [lint, test]
       runs-on: ubuntu-latest
@@ -55,6 +53,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: Output Info
-            run: echo "Deplying...."
+            run: echo "Deploying...."
 
             
