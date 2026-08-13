@@ -30,8 +30,12 @@ jobs:
         - name: Output Files
           uses: actions/upload-artifact@v4
           with:
-            name: test result
-            path: test-output
+            name: test output
+            path: test.json
+        - name: Output
+          run: |
+            ls -la
+            find . -maxdepth 3 -type f | sort
     build:
       needs: [lint, test]
       runs-on: ubuntu-latest
