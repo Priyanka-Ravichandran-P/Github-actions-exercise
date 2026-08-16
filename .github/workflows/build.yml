@@ -41,4 +41,20 @@ jobs:
           run: npm ci
         - name: Build
           run: npm run build
+        - name: Upload Build Files
+          uses: actions/upload-artifact@v4
+          with:
+            name: Build Files
+            path: dist
+    deploy:
+      needs: build
+      runs-on: ubuntu_latest
+      steps:
+        - name: Download Artifactory
+          uses: actions/download-artifact@v4
+          with:
+            name: Files to Deploy
+            path: dist
+        - name: Deploy
+          run: echo "Deploying...."
             
