@@ -46,6 +46,13 @@ jobs:
           with:
             name: Build Files
             path: dist
+        - name: Build Version
+          id: build_version
+          run: |
+            VERSION=$(git describe --tags)
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+        - name: Print Version
+          run : ${{steps.build_version.outputs.version}}  
     deploy:
       needs: build
       runs-on: ubuntu_latest
