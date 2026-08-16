@@ -58,7 +58,7 @@ jobs:
             VERSION=$(git describe --tags --always)
             echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         - name: Print Version
-          run : ${{steps.build_version.outputs.version}}
+          run : echo ${{steps.build_version.outputs.version}}
         - name: Env
           id: env  
           run: echo "environment=dev" >> "$GITHUB_OUTPUT"
