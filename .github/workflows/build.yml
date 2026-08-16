@@ -30,6 +30,10 @@ jobs:
     build:
       needs: [lint, test]
       runs-on: ubuntu-latest
+      outputs:
+          version: ${{steps.build_version.outputs.version}}
+          environment: ${{steps.env.outputs.environment}}
+
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v3
@@ -52,11 +56,16 @@ jobs:
             VERSION=$(git describe --tags)
             echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         - name: Print Version
-          run : ${{steps.build_version.outputs.version}}  
+          run : ${{steps.build_version.outputs.version}}
+        - name: Env
+          id: env  
+          run: echo "environment=dev" >> "$GITHUB_OUTPUT"
     deploy:
       needs: build
       runs-on: ubuntu_latest
       steps:
+        - name: Output Build Version and Environment
+          run: echo Version = ${{needs.build.outputs.version}}, Env = ${{needs.build.outputs.environment}}
         - name: Download Artifactory
           uses: actions/download-artifact@v4
           with:
