@@ -37,6 +37,8 @@ jobs:
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
         - name: Install NodeJS
           uses: actions/setup-node@v3
           with:
@@ -50,10 +52,10 @@ jobs:
           with:
             name: Build Files
             path: dist
-        - name: Build Version
+        - name: Get Version
           id: build_version
           run: |
-            VERSION=$(git describe --tags)
+            VERSION=$(git describe --tags --always)
             echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         - name: Print Version
           run : ${{steps.build_version.outputs.version}}
