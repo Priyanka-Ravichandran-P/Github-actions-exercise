@@ -53,7 +53,7 @@ jobs:
         - name: Download Artifactory
           uses: actions/download-artifact@v4
           with:
-            name: Files to Deploy
+            name: Build Files
             path: dist
         - name: Deploy
           run: echo "Deploying...."
