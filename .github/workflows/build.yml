@@ -68,6 +68,8 @@ jobs:
       uses: ./.github/workflows/reusable.yml
       with:
         artifact-name: Build Files
+      # secrets:
+      #   some-secret: ${{ secrets.some-secret }}
     deploy:
       needs: build
       runs-on: ubuntu_latest
