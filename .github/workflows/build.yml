@@ -66,6 +66,8 @@ jobs:
     report:
       needs: build
       uses: ./.github/workflows/reusable.yml
+      with:
+        artifact-name: Build Files
     deploy:
       needs: build
       runs-on: ubuntu_latest
