@@ -63,6 +63,9 @@ jobs:
         - name: Env
           id: env  
           run: echo "environment=dev" >> "$GITHUB_OUTPUT"
+    report:
+      needs: build
+      uses: ./.github/workflows/reusable.yml
     deploy:
       needs: build
       runs-on: ubuntu_latest

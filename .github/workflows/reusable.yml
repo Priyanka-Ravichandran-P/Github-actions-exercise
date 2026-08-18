@@ -1,0 +1,10 @@
+name: re-use workflow
+on: workflow_call
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Input and Output Artifactory Files
+              run: echo "Outputting the files"
+            - name: Deploy
+              run: echo "Deploying...."
